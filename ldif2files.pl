@@ -2,7 +2,7 @@
 use warnings;
 use strict;
 
-use Data::Dump qw(dump);
+#use Data::Dump qw(dump);
 use MIME::Base64;
 
 our $out;
@@ -10,7 +10,7 @@ our $type = '';
 our $export;
 
 sub dump_out {
-	warn "# out = ",dump($out);
+	#warn "# out = ",dump($out);
 
 	if ( $type eq 'passwd' ) {
 		push @{ $export->{$type} }, join(':',
@@ -93,7 +93,7 @@ while(<>) {
 
 dump_out if $out;
 
-warn "# export = ",dump( $export );
+#warn "# export = ",dump( $export );
 
 foreach my $file ( keys %$export ) {
 	my $filename = $file . '.from-ldap';
