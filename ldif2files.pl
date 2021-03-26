@@ -3,6 +3,7 @@ use warnings;
 use strict;
 
 use Data::Dump qw(dump);
+use MIME::Base64;
 
 our $out;
 our $type = '';
@@ -55,6 +56,8 @@ while(<>) {
 	if ( $type eq 'passwd' ) {
 		if ( m/(uid|uidNumber|gidNumber|homeDirectory|loginShell|gecos): (.+)/ ) {
 			$out->{$1} = $2;
+		} elsif ( m/(gecos):: (.+)/ ) {
+			$out->{$1} = decode_base64( $2 );
 		}
 	} elsif ( $type eq 'group' ) {
 		if ( m/(cn|gidNumber): (\S+)/ ) {
